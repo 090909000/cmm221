@@ -1,65 +1,32 @@
-<!DOCTYPE html>
-<html lang='en'>
-<!-- lang='en' คือการกำหนดภาษาหลักให้กับเว็บไซต์-->
-<head>
-	<meta charset="UTF-8">
-	<title>CMM 19</title>
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.min.css">
-	<!-- css ของ bulma เป็นfrontend อย่างหนึ่ง เพื่อเว็บ Mobilefirst ถ้าใช้ได้แล้วตัวฟอนต์หน้าตาจะเปลี่ยนไป-->
-	<link rel="stylesheet" href="/assets/home.css">
-	<!--ลิ้งกับหน้า home.css ทำให้แถบmenubarไปอยู่ตรงกลาง -->
-</head>
-<body>
-	<header>
-		<div class="has-text-centered">
-			<br>
-			<!--เพื่อเลื่อนโลโก้ ไปอยู่ตรงกลาง เอาโค้ดมาจากbulma-->
-			<img src="/assets/images/logo.png" alt="" width="145" height="auto">
-		</div>
-		<nav class="navbar-tabs">
-			<a href="#" class="navbar-item">INTERVIEW</a>
-			<!--navbar-item คือคำสั่งหนึ่งของ bulma-->
-			<a href="#" class="navbar-item">FORUM</a>
-			<a href="#" class="navbar-item">ARTICLE</a>
-			<a href="#" class="navbar-item">ABOUT US</a>
-			<a href="#" class="navbar-item">CONTACT US</a>
-			<a href="#" class="navbar-item">VIDEO</a>
-			<a href="#" class="navbar-item">PICTURE</a>
-			<a href="#" class="navbar-item">LOGIN</a>
-		</nav>
+{% extends 'layout/base.twig' %}
 
-	</header>
+{% block stylesheet %}
+<link rel="stylesheet" href="/assets/home.css"
+{% endblock %}
+
+{% block content %}
+	
 	<main>
 		<!--ถือเนื้อหาของเว็บไซต์-->
 		<section class="banner">
 			<div class="highlight">
 				<div class="columns">
-					<div class="column highlight-item">
+					<a class="column highlight-item" style="background-image: url({{ highlight.url }});">
+
 					<!--ปกติต้องใส่ไซส์แต่ตัว Bulmaจะคำนวนให้ว่าควรใช้คอลัมเท่าไหร่ แต่ถ้าอยากได้ไม่เท่ากันให้ใส่ตัวเลขเอง-->
-						<h1> สวนตูดผมที </h1>
+						<h1>{{ highlight.title }}</h1>
+					</a>
 					</div>
 				</div>
-			</div>
+			
 				
 			<div class="thumbnail">
 				<div class="columns is-marginless"><!--ใส่เพื่อให้ขอบไม่ติดลบ-->
-					<div class="column thumbnail-item is-paddingless"
-					style ="background-image: url(/assets/images/home/banner/thumbnail-1.jpg);">
-					one
-					</div>
-					<!--ใส่ is-paddingless เพื่อทำให้ช่องว่างระหว่างรูปหายไป-->
-					<div class="column thumbnail-item is-paddingless"
-						style ="background-image: url(/assets/images/home/banner/thumbnail-2.jpg);">
-					two
-					</div>
-					<div class="column thumbnail-item is-paddingless"
-						style ="background-image: url(/assets/images/home/banner/thumbnail-3.jpg);">
-					three
-					</div>
-					<div class="column thumbnail-item is-paddingless"
-						style ="background-image: url(/assets/images/home/banner/thumbnail-4.jpg);">
-					four
-					</div>
+					{% for item in thumbnail %}
+					<a href ="#" class="column thumbnail-item" style="background-image: url({{ item.url }});">
+						{{ item.title }}
+					</a>
+					{% endfor %}
 				</div>
 			</div>
 		</section>
@@ -209,7 +176,4 @@
 			</div>
 		</section>
 	</main>
-
-
-</body>
-</html>
+	{% endblock %}
